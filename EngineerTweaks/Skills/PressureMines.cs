@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using RoR2.Skills;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace HET.Skills
@@ -15,11 +16,11 @@ namespace HET.Skills
 
         public override string SkillToken => "secondary";
 
-        public override string DescText => "Place a two-stage mine that deals <style=cIsDamage>300% damage</style>, or <style=cIsDamage>" + d(3f * DamageScale) + " damage</style> if fully armed. Can hold up to " + Charges + ".";
+        public override string DescText => "Place a two-stage mine that deals <style=cIsDamage>300% damage</style>, or <style=cIsDamage>" + Mathf.Round(300f * DamageScale) + "% damage</style> if fully armed. Can hold up to " + Charges + ".";
 
         public override void Init()
         {
-            DamageScale = ConfigOption(3.5f, "Damage Scale", "Decimal. Vanilla is 3");
+            DamageScale = ConfigOption(3f + 2f / 3f, "Damage Scale", "Decimal. Vanilla is 3");
             AoEScale = ConfigOption(2f, "Area of Effect Scale", "Vanilla is 2");
             Charges = ConfigOption(2, "Charges", "Vanilla is 4");
             Cooldown = ConfigOption(4.5f, "Cooldown", "Vanilla is 8");

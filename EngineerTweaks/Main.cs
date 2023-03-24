@@ -5,7 +5,6 @@ using R2API;
 using R2API.ContentManagement;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -20,7 +19,7 @@ namespace HET
 
         public const string PluginAuthor = "HIFU";
         public const string PluginName = "HIFUEngineerTweaks";
-        public const string PluginVersion = "1.2.0";
+        public const string PluginVersion = "1.1.2";
 
         public static ConfigFile HETConfig;
         public static ManualLogSource HETLogger;

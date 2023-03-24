@@ -1,7 +1,5 @@
-﻿using R2API;
-using RoR2;
+﻿using RoR2;
 using RoR2.Skills;
-using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -32,7 +30,7 @@ namespace HET.Misc
         {
             var engiBody = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiBody.prefab").WaitForCompletion().GetComponent<CharacterBody>();
             engiBody.baseDamage = BaseDamage;
-
+            /*
             defectivePropellants = ScriptableObject.CreateInstance<SkillDef>();
             defectivePropellants.skillNameToken = "HET_ENGI_PASSIVE_NAME";
             (defectivePropellants as ScriptableObject).name = "DefectivePropellantsPassive";
@@ -61,7 +59,7 @@ namespace HET.Misc
                 }
             }
             // idk copied from randomlyawesome
-
+            */
             engiBody.baseJumpPower = BaseJumpPower;
             engiBody.baseMoveSpeed = BaseMoveSpeed;
             // for passive, though i wouldnt know how to check for it, maybe just genericskill checking jank + recalcstats?

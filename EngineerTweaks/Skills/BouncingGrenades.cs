@@ -1,4 +1,8 @@
-﻿namespace HET.Skills
+﻿using RoR2.Projectile;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+
+namespace HET.Skills
 {
     public class BouncingGrenades : TweakBase
     {
@@ -17,6 +21,7 @@
         {
             Damage = ConfigOption(1.6f, "Damage", "Decimal. Vanilla is 1");
             MaximumGrenadesCount = ConfigOption(3, "Grenade Count", "Vanilla is 8");
+            AoE = ConfigOption(4.5f, "Area of Effect", "Vanilla is 3.5");
             base.Init();
         }
 
@@ -43,6 +48,10 @@
                 EntityStates.Engi.EngiWeapon.FireGrenades.baseDuration = 1f;
                 orig(self);
             };
+
+            var grenade = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiGrenadeProjectile.prefab").WaitForCompletion();
+            var projectileImpactExplosion = grenade.GetComponent<ProjectileImpactExplosion>();
+            projectileImpactExplosion.blastRadius = AoE;
         }
     }
 }
