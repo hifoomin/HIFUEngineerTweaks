@@ -2,7 +2,6 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using R2API;
-using R2API.ContentManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,6 @@ using System.Reflection;
 namespace HET
 {
     [BepInDependency(LanguageAPI.PluginGUID)]
-    [BepInDependency(R2APIContentManager.PluginGUID)]
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
     public class Main : BaseUnityPlugin
     {
