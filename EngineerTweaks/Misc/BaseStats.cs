@@ -3,21 +3,21 @@ using RoR2.Skills;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace HET.Misc
+namespace HIFUEngineerTweaks.Misc
 {
-    public class DefectivePropellants : MiscBase
+    public class BaseStats : MiscBase
     {
-        public static float BaseDamage;
-        public static float BaseJumpPower;
-        public static float BaseMoveSpeed;
+        public static float baseDamage;
+        public static float baseJumpPower;
+        public static float baseMoveSpeed;
         public static SkillDef defectivePropellants;
         public override string Name => ":: Misc : Base Stats";
 
         public override void Init()
         {
-            BaseDamage = ConfigOption(12f, "Base Damage", "Decimal. Vanilla is 14");
-            BaseJumpPower = ConfigOption(20f, "Base Jump Power", "Vanilla is 15");
-            BaseMoveSpeed = ConfigOption(7.5f, "Base Move Speed", "Vanilla is 7");
+            baseDamage = ConfigOption(12f, "Base Damage", "Decimal. Vanilla is 14");
+            baseJumpPower = ConfigOption(20f, "Base Jump Power", "Vanilla is 15");
+            baseMoveSpeed = ConfigOption(7.5f, "Base Move Speed", "Vanilla is 7");
             base.Init();
         }
 
@@ -29,7 +29,7 @@ namespace HET.Misc
         public static void Changes()
         {
             var engiBody = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiBody.prefab").WaitForCompletion().GetComponent<CharacterBody>();
-            engiBody.baseDamage = BaseDamage;
+            engiBody.baseDamage = baseDamage;
             /*
             defectivePropellants = ScriptableObject.CreateInstance<SkillDef>();
             defectivePropellants.skillNameToken = "HET_ENGI_PASSIVE_NAME";
@@ -60,8 +60,8 @@ namespace HET.Misc
             }
             // idk copied from randomlyawesome
             */
-            engiBody.baseJumpPower = BaseJumpPower;
-            engiBody.baseMoveSpeed = BaseMoveSpeed;
+            engiBody.baseJumpPower = baseJumpPower;
+            engiBody.baseMoveSpeed = baseMoveSpeed;
             // for passive, though i wouldnt know how to check for it, maybe just genericskill checking jank + recalcstats?
         }
     }

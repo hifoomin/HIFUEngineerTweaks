@@ -1,4 +1,4 @@
-﻿namespace HET
+﻿namespace HIFUEngineerTweaks
 {
     public abstract class MiscBase
     {
@@ -7,7 +7,9 @@
 
         public T ConfigOption<T>(T value, string name, string description)
         {
-            return Main.HETConfig.Bind<T>(Name, name, value, description).Value;
+            var config = Main.HETConfig.Bind<T>(Name, name, value, description);
+            ConfigManager.HandleConfig<T>(config, Main.HETBackupConfig, name);
+            return config.Value;
         }
 
         public abstract void Hooks();

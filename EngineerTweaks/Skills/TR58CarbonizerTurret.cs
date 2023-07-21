@@ -4,14 +4,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace HET.Skills
+namespace HIFUEngineerTweaks.Skills
 {
     public class TR58CarbonizerTurret : TweakBase
     {
-        public static float Damage;
-        public static int Charges;
-        public static float Cooldown;
-
         public override string Name => ": Special :: TR58 Carbonizer Turret";
 
         public override string SkillToken => "special_alt1";
@@ -30,19 +26,19 @@ namespace HET.Skills
 
         public static void Changes()
         {
-            var Turret = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiWalkerTurretMaster.prefab").WaitForCompletion();
-            Component[] array = Turret.GetComponents<AISkillDriver>();
+            var turret = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiWalkerTurretMaster.prefab").WaitForCompletion();
+            Component[] array = turret.GetComponents<AISkillDriver>();
 
-            AISkillDriver AI = (from x in Turret.GetComponents<AISkillDriver>()
+            AISkillDriver AI = (from x in turret.GetComponents<AISkillDriver>()
                                 where x.customName == "ReturnToLeader"
                                 select x).First();
             AI.shouldSprint = true;
             AI.minDistance = 35f;
 
-            var Walking = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiWalkerTurretBody.prefab").WaitForCompletion().GetComponent<CharacterBody>();
-            Walking.baseDamage = 14f;
-            Walking.baseMoveSpeed = 11f;
-            Walking.baseMaxHealth = 100f;
+            var walking = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiWalkerTurretBody.prefab").WaitForCompletion().GetComponent<CharacterBody>();
+            walking.baseDamage = 14f;
+            walking.baseMoveSpeed = 11f;
+            walking.baseMaxHealth = 100f;
         }
     }
 }

@@ -2,14 +2,10 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace HET.Skills
+namespace HIFUEngineerTweaks.Skills
 {
     public class TR12GaussAutoTurret : TweakBase
     {
-        public static float Damage;
-        public static int Charges;
-        public static float Cooldown;
-
         public override string Name => ": Special : TR12 Gauss Auto Turret";
 
         public override string SkillToken => "special";
@@ -28,10 +24,10 @@ namespace HET.Skills
 
         public static void Changes()
         {
-            var Stationary = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiTurretBody.prefab").WaitForCompletion().GetComponent<CharacterBody>();
-            Stationary.baseDamage = 14f;
+            var stationary = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiTurretBody.prefab").WaitForCompletion().GetComponent<CharacterBody>();
+            stationary.baseDamage = 14f;
 
-            Stationary.baseMaxHealth = 150f;
+            stationary.baseMaxHealth = 150f;
         }
     }
 }

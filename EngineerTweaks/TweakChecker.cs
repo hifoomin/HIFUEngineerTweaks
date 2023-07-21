@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HET
+namespace HIFUEngineerTweaks
 {
     public abstract class TweakBase<T> : TweakBase where T : TweakBase<T>
     {

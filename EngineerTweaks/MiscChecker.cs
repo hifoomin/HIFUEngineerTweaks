@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HET
+namespace HIFUEngineerTweaks
 {
     public abstract class MiscBase<T> : MiscBase where T : MiscBase<T>
     {

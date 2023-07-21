@@ -1,13 +1,14 @@
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using HarmonyLib;
 using R2API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace HET
+namespace HIFUEngineerTweaks
 {
     [BepInDependency(LanguageAPI.PluginGUID)]
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
@@ -17,15 +18,35 @@ namespace HET
 
         public const string PluginAuthor = "HIFU";
         public const string PluginName = "HIFUEngineerTweaks";
-        public const string PluginVersion = "1.1.2";
+        public const string PluginVersion = "1.1.4";
 
         public static ConfigFile HETConfig;
+        public static ConfigFile HETBackupConfig;
+
+        public static ConfigEntry<bool> enableAutoConfig { get; set; }
+        public static ConfigEntry<string> latestVersion { get; set; }
+
         public static ManualLogSource HETLogger;
+
+        public static bool _preVersioning = false;
 
         public void Awake()
         {
             HETLogger = Logger;
             HETConfig = Config;
+
+            HETBackupConfig = new(Paths.ConfigPath + "\\" + PluginAuthor + "." + PluginName + ".Backup.cfg", true);
+            HETBackupConfig.Bind(": DO NOT MODIFY THIS FILES CONTENTS :", ": DO NOT MODIFY THIS FILES CONTENTS :", ": DO NOT MODIFY THIS FILES CONTENTS :", ": DO NOT MODIFY THIS FILES CONTENTS :");
+
+            enableAutoConfig = HETConfig.Bind("Config", "Enable Auto Config Sync", true, "Disabling this would stop HIFUEngineerTweaks from syncing config whenever a new version is found.");
+            _preVersioning = !((Dictionary<ConfigDefinition, string>)AccessTools.DeclaredPropertyGetter(typeof(ConfigFile), "OrphanedEntries").Invoke(HETConfig, null)).Keys.Any(x => x.Key == "Latest Version");
+            latestVersion = HETConfig.Bind("Config", "Latest Version", PluginVersion, "DO NOT CHANGE THIS");
+            if (enableAutoConfig.Value && (_preVersioning || (latestVersion.Value != PluginVersion)))
+            {
+                latestVersion.Value = PluginVersion;
+                ConfigManager.VersionChanged = true;
+                HETLogger.LogInfo("Config Autosync Enabled.");
+            }
 
             IEnumerable<Type> enumerable = from type in Assembly.GetExecutingAssembly().GetTypes()
                                            where !type.IsAbstract && type.IsSubclassOf(typeof(TweakBase))
