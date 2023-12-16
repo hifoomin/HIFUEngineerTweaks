@@ -16,9 +16,9 @@ namespace HIFUEngineerTweaks
     {
         public const string PluginGUID = PluginAuthor + "." + PluginName;
 
-        public const string PluginAuthor = "HIFU";
+        public const string PluginAuthor = "zzzHIFU";
         public const string PluginName = "HIFUEngineerTweaks";
-        public const string PluginVersion = "1.1.4";
+        public const string PluginVersion = "1.2.0";
 
         public static ConfigFile HETConfig;
         public static ConfigFile HETBackupConfig;
