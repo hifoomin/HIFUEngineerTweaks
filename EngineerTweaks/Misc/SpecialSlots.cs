@@ -36,12 +36,6 @@ namespace HIFUEngineerTweaks.Misc
                 skillToTurretMap.Add(skill, ((EntityStates.Engi.EngiWeapon.PlaceTurret)Activator.CreateInstance(skill.activationState.stateType)).turretMasterPrefab);
             }
 
-            for (int i = 0; i < specialSlot2Family.variants.Length; i++)
-            {
-                var skill = specialSlot2Family.variants[i].skillDef;
-                skillToTurretMap.Add(skill, ((EntityStates.Engi.EngiWeapon.PlaceTurret)Activator.CreateInstance(skill.activationState.stateType)).turretMasterPrefab);
-            }
-
             var engi = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiBody.prefab").WaitForCompletion();
             var specialSkill = engi.GetComponents<GenericSkill>().Where(x => x.skillName == "PlaceTurret").First();
             specialSkill._skillFamily = specialSlot1Family;
@@ -102,7 +96,7 @@ namespace HIFUEngineerTweaks.Misc
                     {
                         if (self.characterBody)
                         {
-                            self.characterBody.SendConstructTurret(self.characterBody, self.currentPlacementInfo.position, self.currentPlacementInfo.rotation, MasterCatalog.FindMasterIndex(Activator.CreateInstance(self.turretMasterPrefab)); // what turret here?????? what?
+                            self.characterBody.SendConstructTurret(self.characterBody, self.currentPlacementInfo.position, self.currentPlacementInfo.rotation, MasterCatalog.FindMasterIndex(skillToTurretMap[self.outer.GetComponents<GenericSkill>().Where(x => x.skillName == "PlaceTurret2").First().skillDef])); // what turret here?????? what?
                             if (self.skillLocator)
                             {
                                 GenericSkill skill = self.skillLocator.GetSkill(SkillSlot.Special);
