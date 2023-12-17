@@ -2,6 +2,7 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
+using HIFUEngineerTweaks.Misc;
 using R2API;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,8 @@ namespace HIFUEngineerTweaks
                     based.Init();
                 }
             }
+
+            SpecialSlots.Init();
         }
 
         public bool ValidateTweak(TweakBase tb)
